@@ -1,3 +1,4 @@
+//chatBoxTitle es el identificador unico de cada chat por que son ventana por usuario, varias ventanas
 socket.on('dataU', function(dato){
 	socket.emit('historychat', {user:'68458'+userGlobal, userNick: userNick, userRep: dato.doc});//envia los datos para el histori
 	var cont=se('body');
