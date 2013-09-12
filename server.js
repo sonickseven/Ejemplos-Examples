@@ -6,8 +6,8 @@ var d=new Date();
 //console.log(d.toLocaleTimeString());
 ws.disable('log');
 ws.on('connection', function(socket){
-	socket.on('chatCreate', function(dato){
-		selects('usuario', 'cod', conexion, dato.substring(5), 'cod', 0, 10, function(a){
+	socket.on('chatCreate', function(dato){//envia todos los datos necesarios del user receptor
+		selects('usuario', 'cod', conexion, dato.substring(5), 'cod', 0, 10, function(a){//hace una consulta
 			socket.emit('dataU', {nick: a[0].nick, doc: '3546841'+a[0].cod, chatBoxTitle: dato});
 		});
 	});
@@ -24,7 +24,7 @@ ws.on('connection', function(socket){
 		});
 	});
 
-	socket.on('chat', function(data){
+	socket.on('chat', function(data){//funcion que hace insercion del mensaje del chat
 		var colum=['id_inicia', 'id_receptor', 'mensaje', 'enviado_por', 'date', 'time', 'visto'];
 		var dato=[data.user, data.recep, data.message, data.nick, d.toLocaleDateString(), d.toLocaleTimeString(), 1];
 		if(insert('history_message', colum, dato, conexion)){
