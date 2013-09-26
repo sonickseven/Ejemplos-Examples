@@ -42,7 +42,7 @@ function domHistory(session, usuario, diseno, conexion, selects, fila5, fila6){
                     }
                 });
             }else{
-                contenido=contenido+'<div class="nofriend"></div>';//se sale del callback :(
+                contenido=contenido+'<div class="nofriend"></div>';//se sale del callback :( no habia otra forma o eso creo
             }
         }
     });
