@@ -1,3 +1,37 @@
+
+function histori(dato, callback) {//se asigna desde un socket.on('timeline', histori)
+    var usuario = dato.meet.substr(17).substr(0, dato.longs.substr(8)), session=dato.session;
+    var historias = [], userObj = [];
+    timeLine(conexion, usuario, function(a){
+        var loop = a.length, count = 0
+        a.forEach(function(ele, ind){// se hace un foreach para recorrer el array ind es el indice y ele es el cotenido
+            slt.selectEspecific(conexion, ['nick', 'nombres'], 'usuario', 'cod', ele.seguido, 'cod', '', 0, 1, function (user){
+                if(ele.NoSee!==null){
+                    switch(ele.NoSee){
+                        case String(usuario)://no la ve el usuario
+                        //console.log('no lo ve el dueño', ind);
+                        break;
+                        case '0000'://no la ve nadie
+                        //console.log('no lo ve nadie', ind);
+                        break;
+                        default:
+                        domHistory(session, usuario, diseno, conexion, slt, ele, user[0]);
+                        //console.log('otros usuarios');
+                        break;
+                    }
+                }else{
+                    domHistory(session, usuario, diseno, conexion, slt, ele, user[0]);
+                }
+                
+                if (loop == count){//cuando los dos son iguales se envia el callback
+                    //callback(userObj)
+                }
+                count++//se incrementa el valor por cada ciclo
+            });
+        });
+    });
+}
+
 function domHistory(session, usuario, diseno, conexion, selects, fila5, fila6){
     contenido="<section id='post' class='POST"+fila5.cod+">"+
                     "<section id='row'><a href='../proceso_logeo/index.php?cod="+fila6.nick+"' id='comentPho'>"+diseno.photos(fila5, 70, 60)+"<div>"+fila6.nick+"</div></a>"+
