@@ -1,0 +1,37 @@
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+        <title>Problema</title>
+        <script language="javascript" type="text/javascript" src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script>
+        document.addEventListener('DOMContentLoaded', function(){
+                se('#call').addEventListener('click',function(){
+                        clickFunt();
+                },false);
+                //clickFunt();
+        },false);
+        function se(tag){
+                return document.querySelector(tag);
+        }
+        function clickFunt(){
+                se('#active').addEventListener('click', llamado,false);
+        }
+        function llamado(){
+                console.log('Soy el mundo');
+                $('.mainImage').fadeToggle(450);
+        }
+        </script>
+        <style type="text/css">
+        span{display: inline-block; padding: 4px 6px; margin: 0 6px; cursor: pointer; font-size: 15px}
+        span:hover{text-shadow: 0 0 8px #000;}
+        </style>
+</head>
+<body>
+        <h1>El problema de llamar funciones de eventos</h1>
+        <p>Primero dale click en llamar y despues en activar, despues vuelve a hacer lo mismo y veras que se multiplica el llamado y en este caso se muestra y se esconde, bis</p>
+        <span id="call">Llamar click</span>
+        <span id="active">Activarla</span>
+        <br>
+        <img class="mainImage" src="http://fotogena.co/usuarios/Official_Fotogena/fotos/fotog2.jpg" alt="Crea tu mundo, Vive tu historia" width="300">
+</body>
+</html>
