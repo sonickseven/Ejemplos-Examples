@@ -1,0 +1,5 @@
+wget https://staticdownloads.site24x7.com/server/Site24x7_Linux_64bit.install
+
+sudo chmod 755 Site24x7_Linux_64bit.install
+
+sudo ./Site24x7_Linux_64bit.install -i -key=e6fd77a9bcae213cd4201a02a1a2e3d3f675d77f
