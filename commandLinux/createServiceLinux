@@ -1,0 +1,70 @@
+instalar servicios
+
+EN UBUNTU 16
+sudo apt-get install upstart-sysv
+
+//crear este archivo y guardarlo en /etc/init/nameService.conf
+/************************para el archivo**********************/
+start on runlevel [2345]
+stop on runlevel [!2345]
+
+respawn
+respawn limit 10 5
+
+setuid root
+chdir /
+
+env NODE_ENV="production"
+
+exec node /home/programs/yubiunsoigr/server.js
+
+/**********************fin para el archivo*********************/
+
+EN DEBIAN 8
+
+1) verificamos que este instalado "systemctl"
+$ sudo systemctl list-units --type=target
+
+2) si no sale algún problema seguimos con lo siguiente
+3) en el archivo que inicia el servidor node.js ponemos en su parte superior esto:
+
+#!/usr/bin/env node
+
+4) esto le muestra al sistema linux que es un archivo que puede correr como programa y funciona con node "node /dir/file.js"
+5) escribimos el comando al archivo para darle premisos de ejecutarse como programa
+
+$ sudo chmod +x /dir/file.js
+
+6) para probar solo escribimos la dirección del archivo JS sin el comando "node" de antecesor
+
+$sudo /dir/file.js
+
+7) si funciona bien tonces vamos al 50%
+
+8) creamos el archivo "/lib/systemd/system/nameService.service" y ponemos el siguiente contenido
+
+/*********** contenido del archivo *******************/
+
+[Unit]
+Description=descripción del servicio
+
+[Service]
+ExecStart=/dir/file.js
+StandardOutput=null
+
+[Install]
+WantedBy=multi-user.target
+Alias=nameService.service
+
+/*********** contenido del archivo *******************/
+
+9) despues de crear ese archivo ahora habilitamos el servicio:
+
+$ sudo systemctl enable nameService.service
+
+10) inciamos el servicio:
+
+$ sudo systemctl start nameService.service
+
+11) y si no muestra errores la consola tonces todo esta ok (y)
+
