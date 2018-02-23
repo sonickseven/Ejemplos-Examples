@@ -1,0 +1,3 @@
+#comando para convertir los videos a mp4 para celulares AAC
+
+ffmpeg -i input.mkv -c:v libx264 -c:a aac out.mp4
